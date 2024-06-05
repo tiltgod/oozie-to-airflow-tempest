@@ -14,10 +14,9 @@
   limitations under the License.
 #}
 {% import "macros/props.tpl" as props_macro %}
-{{ task_id | to_var }} = bash.BashOperator(
-    task_id={{ task_id | to_python }},
-    trigger_rule={{ trigger_rule | to_python }},
-    bash_command={% include "pig_command.tpl" %} % (CONFIG['dataproc_cluster'], CONFIG['gcp_region'],
-        shlex.quote({{ pig_command | to_python }})),
-    params={{ props_macro.props(action_node_properties=action_node_properties) }},
+{{ task_id | to_var }} = glue.GlueJobOperator(
+        task_id={{ task_id | to_python }},
+        job_name={{ task_id | to_python }},
+        script_location=JOB_PROPS.script_location,
+        job_arguments={{ props_macro.props(action_node_properties=action_node_properties) }},
 )

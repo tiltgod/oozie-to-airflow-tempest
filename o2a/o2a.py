@@ -131,7 +131,7 @@ Otherwise please provide it.
 
 def parse_args(args):
     parser = argparse.ArgumentParser(
-        description="Convert Apache Oozie workflows to Apache Airflow workflows."
+        description="Convert Apache Oozie workflows to Apache Airflow workflows kuy55555."
     )
     parser.add_argument("-i", "--input-directory-path", help="Path to input directory", required=True)
     parser.add_argument("-o", "--output-directory-path", help="Desired output directory", required=True)

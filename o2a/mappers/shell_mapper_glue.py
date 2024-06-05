@@ -56,7 +56,7 @@ class ShellMapper(ActionMapper):
     def to_tasks_and_relations(self):
         action_task = Task(
             task_id=self.name,
-            template_name="shell.tpl",
+            template_name="shell_glue.tpl",
             template_params=dict(
                 pig_command=self.pig_command, action_node_properties=self.props.action_node_properties
             ),
