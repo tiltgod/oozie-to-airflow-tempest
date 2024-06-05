@@ -1,0 +1,31 @@
+<workflow-app name="${flow_name}-${job_name}-step-workflow-${coordinator_time}"
+    xmlns="uri:oozie:workflow:1.0">
+    <start to="tfm_abt_019_03_combine_table_ball_01-cust-view_act01"/>
+
+    <kill name="Kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+
+    <action name="tfm_abt_019_03_combine_table_ball_01-cust-view_act01">
+        <shell xmlns="uri:oozie:shell-action:1.0">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>run_hive_cli.sh</exec>
+            <argument>${env}</argument>
+            <argument>${job_name}</argument>
+            <argument>${coordinator_time}</argument>
+            <file>${base_path}/oozie/script/framework/run_hive_cli.sh</file>
+            <file>${base_path}/oozie/config/${env}-spark_env.conf#spark_env.conf</file>
+            <file>${base_path}/oozie/script/macro_file/macro_reader.sh</file>
+            <file>${base_path}/oozie/script/encryption/decryption_string.py</file>
+            <file>${base_path}/oozie/config/${env}-hive.conf#hive.conf</file>
+            <file>${base_path}/oozie/config/sqoop-ingestion/${env}-database.conf#database.conf</file>
+            <file>${base_path}/kerberos/${wf:user()}.keytab#user.keytab</file>
+            <file>${base_path}/oozie/hive/${flow_name}/${job_name}/tfm/tfm_abt_019_03_combine_table_ball_01-cust-view_act01.hql#job.hql</file>
+        </shell>
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+
+    <end name="End"/>
+</workflow-app>
