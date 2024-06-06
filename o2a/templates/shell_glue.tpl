@@ -14,9 +14,15 @@
   limitations under the License.
 #}
 {% import "macros/props.tpl" as props_macro %}
-{{ task_id | to_var }} = glue.GlueJobOperator(
-        task_id={{ task_id | to_python }},
-        job_name={{ task_id | to_python }},
-        script_location=JOB_PROPS.script_location,
-        job_arguments={{ props_macro.props(action_node_properties=action_node_properties) }},
+
+{{ task_id | to_var }} = GlueJobOperator(
+    task_id={{ task_id | to_python }},
+    job_name={{ glue_job_name | to_python }},
+    script_location={{ glue_script_location | to_python }},
+    s3_bucket={{ s3_bucket | to_python }},
+    iam_role_name={{ iam_role_name | to_python }},
+    region_name={{ region_name | to_python }},
+    script_args={{ script_args | to_python }},
+    params={{ props_macro.props(action_node_properties=action_node_properties) }},
+    trigger_rule={{ trigger_rule | to_python }},
 )
