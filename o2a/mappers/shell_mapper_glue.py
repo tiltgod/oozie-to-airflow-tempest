@@ -59,10 +59,10 @@ class ShellMapper(ActionMapper):
             template_name="shell_glue.tpl",
             template_params=dict(
                 job_name=self.name,  # Assuming job_name should be same as task name
-                script_location=self.props.merged.get("script_location", ""),  # Get script_location from properties
-                s3_bucket=self.props.merged.get("s3_bucket", ""),  # Get s3_bucket from properties
-                iam_role_name=self.props.merged.get("iam_role_name", ""),  # Get iam_role_name from properties
-                region_name=self.props.merged.get("region_name", ""),  # Get region_name from properties
+                script_location=self.props.job_properties.get("script_location", ""),
+                s3_bucket=self.props.job_properties.get("s3_bucket", ""),
+                iam_role_name=self.props.job_properties.get("iam_role_name", ""),
+                region_name=self.props.job_properties.get("region_name", ""),
                 script_args={},  # Assuming script_args is empty for now
                 action_node_properties=self.props.action_node_properties
             ),

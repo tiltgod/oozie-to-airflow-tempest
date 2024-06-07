@@ -17,8 +17,8 @@
 
 {{ task_id | to_var }} = GlueJobOperator(
     task_id={{ task_id | to_python }},
-    job_name={{ glue_job_name | to_python }},
-    script_location={{ glue_script_location | to_python }},
+    job_name={{ job_name | to_python }},
+    script_location={{ script_location | to_python }},
     s3_bucket={{ s3_bucket | to_python }},
     iam_role_name={{ iam_role_name | to_python }},
     region_name={{ region_name | to_python }},
