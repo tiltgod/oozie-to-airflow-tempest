@@ -52,6 +52,9 @@ class ShellMapper(ActionMapper):
 
         self.bash_command = el_parser.translate(cmd, quote=False)
         self.pig_command = f"sh {self.bash_command}"
+        
+        # Extract script arguments as a dictionary
+        self.script_args = {f'arg{i}': el_parser.translate(arg, quote=False) for i, arg in enumerate(args)}
 
     def to_tasks_and_relations(self):
         action_task = Task(
@@ -63,7 +66,7 @@ class ShellMapper(ActionMapper):
                 s3_bucket=self.props.job_properties.get("s3_bucket", ""),
                 iam_role_name=self.props.job_properties.get("iam_role_name", ""),
                 region_name=self.props.job_properties.get("region_name", ""),
-                script_args={},  # Assuming script_args is empty for now
+                script_args=self.script_args,  # Pass the extracted script arguments
                 action_node_properties=self.props.action_node_properties
             ),
         )
