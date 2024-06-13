@@ -108,7 +108,7 @@ class SubworkflowMapper(ActionMapper):
     def required_imports(self) -> Set[str]:
         return {
             "from airflow.utils import dates",
-            "from airflow.providers.google.cloud.operators import dataproc",
+            # "from airflow.providers.google.cloud.operators import dataproc",
             "from airflow.operators.subdag import SubDagOperator",
             f"import subdag_{self.app_name}",
         }
