@@ -51,7 +51,7 @@ class ShellMapper(ActionMapper):
         cmd = " ".join([cmd_txt] + [x for x in args])
 
         self.bash_command = el_parser.translate(cmd, quote=False)
-        self.pig_command = f"sh {self.bash_command}"
+        # self.pig_command = f"sh {self.bash_command}"
         
         # Extract script arguments as a dictionary
         self.script_args = {f'arg{i}': el_parser.translate(arg, quote=False) for i, arg in enumerate(args)}
