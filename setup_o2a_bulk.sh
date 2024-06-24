@@ -62,16 +62,20 @@ cat << EOF > run_o2a_bulk.sh
 
 # Convert shell actions
 for subflow in CRM_CASA_SEGMENT_MODEL_CONVERTED/shell_actions/*; do
-    subflow_name=$(basename "$subflow")
-    echo "Converting shell action: \$subflow_name"
-    ./bin/o2a -i "\$subflow" -o "CRM_CASA_SEGMENT_MODEL_CONVERTED/output/shell_\$subflow_name"
+    if [ -d "\$subflow" ]; then
+        subflow_name=\$(basename "\$subflow")
+        echo "Converting shell action: \$subflow_name"
+        ./bin/o2a -i "\$subflow" -o "CRM_CASA_SEGMENT_MODEL_CONVERTED/output/shell_\$subflow_name"
+    fi
 done
 
 # Convert subworkflow actions
 for subflow in CRM_CASA_SEGMENT_MODEL_CONVERTED/subworkflow_actions/*; do
-    subflow_name=$(basename "\$subflow")
-    echo "Converting subworkflow action: \$subflow_name"
-    ./bin/o2a -i "\$subflow" -o "CRM_CASA_SEGMENT_MODEL_CONVERTED/output/subwf_\$subflow_name"
+    if [ -d "\$subflow" ]; then
+        subflow_name=\$(basename "\$subflow")
+        echo "Converting subworkflow action: \$subflow_name"
+        ./bin/o2a -i "\$subflow" -o "CRM_CASA_SEGMENT_MODEL_CONVERTED/output/subwf_\$subflow_name"
+    fi
 done
 EOF
 
