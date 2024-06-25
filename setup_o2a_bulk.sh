@@ -10,11 +10,24 @@ fi
 
 INPUT_FOLDER="$1"
 CONVERTED_FOLDER="${INPUT_FOLDER}_CONVERTED"
+LOG_FILE="conversion_log_$(date +%Y%m%d_%H%M%S).log"
+
+# Logging function
+log() {
+    local level="$1"
+    local message="$2"
+    local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
+    echo "[$timestamp] [$level] $message" | tee -a "$LOG_FILE"
+}
+
+log "INFO" "Starting conversion process for $INPUT_FOLDER"
 
 # Create the main folders
 mkdir -p "$CONVERTED_FOLDER/shell_actions"
 mkdir -p "$CONVERTED_FOLDER/subworkflow_actions"
 mkdir -p "$CONVERTED_FOLDER/output"
+
+log "INFO" "Created directory structure in $CONVERTED_FOLDER"
 
 # Function to determine action type
 determine_action_type() {
@@ -42,31 +55,31 @@ for folder in "$INPUT_FOLDER"/*; do
                     target_folder="$CONVERTED_FOLDER/shell_actions/$subflow_name"
                     mkdir -p "$target_folder/hdfs"
                     cp "$folder/workflow.xml" "$target_folder/hdfs/"
-                    [ -f "$folder/job.properties" ] && cp "$folder/job.properties" "$target_folder/" || echo "Warning: job.properties not found in $folder"
-                    [ -f "$INPUT_FOLDER/configuration.properties" ] && cp "$INPUT_FOLDER/configuration.properties" "$target_folder/" || echo "Warning: configuration.properties not found"
-                    echo "Processed shell action: $subflow_name"
+                    [ -f "$folder/job.properties" ] && cp "$folder/job.properties" "$target_folder/" || log "WARN" "job.properties not found in $folder"
+                    [ -f "$INPUT_FOLDER/configuration.properties" ] && cp "$INPUT_FOLDER/configuration.properties" "$target_folder/" || log "WARN" "configuration.properties not found"
+                    log "INFO" "Processed shell action: $subflow_name"
                     ;;
                 subworkflow)
                     target_folder="$CONVERTED_FOLDER/subworkflow_actions/$subflow_name"
                     mkdir -p "$target_folder/hdfs"
                     cp "$folder/workflow.xml" "$target_folder/hdfs/"
-                    [ -f "$folder/job.properties" ] && cp "$folder/job.properties" "$target_folder/" || echo "Warning: job.properties not found in $folder"
-                    [ -f "$INPUT_FOLDER/configuration.properties" ] && cp "$INPUT_FOLDER/configuration.properties" "$target_folder/" || echo "Warning: configuration.properties not found"
+                    [ -f "$folder/job.properties" ] && cp "$folder/job.properties" "$target_folder/" || log "WARN" "job.properties not found in $folder"
+                    [ -f "$INPUT_FOLDER/configuration.properties" ] && cp "$INPUT_FOLDER/configuration.properties" "$target_folder/" || log "WARN" "configuration.properties not found"
                     
                     # Handle nested sub-workflows
                     if [ -d "$folder/subwf" ]; then
                         mkdir -p "$target_folder/subwf/hdfs"
-                        [ -f "$folder/subwf/workflow.xml" ] && cp "$folder/subwf/workflow.xml" "$target_folder/subwf/hdfs/" || echo "Warning: subwf/workflow.xml not found in $folder"
-                        [ -f "$folder/subwf/job.properties" ] && cp "$folder/subwf/job.properties" "$target_folder/subwf/" || echo "Warning: subwf/job.properties not found in $folder"
+                        [ -f "$folder/subwf/workflow.xml" ] && cp "$folder/subwf/workflow.xml" "$target_folder/subwf/hdfs/" || log "WARN" "subwf/workflow.xml not found in $folder"
+                        [ -f "$folder/subwf/job.properties" ] && cp "$folder/subwf/job.properties" "$target_folder/subwf/" || log "WARN" "subwf/job.properties not found in $folder"
                     fi
-                    echo "Processed subworkflow action: $subflow_name"
+                    log "INFO" "Processed subworkflow action: $subflow_name"
                     ;;
                 unknown)
-                    echo "Unknown action type for $subflow_name, skipping..."
+                    log "WARN" "Unknown action type for $subflow_name, skipping..."
                     ;;
             esac
         else
-            echo "Warning: workflow.xml not found in $folder"
+            log "WARN" "workflow.xml not found in $folder"
         fi
     fi
 done
@@ -78,28 +91,39 @@ cat << EOF > run_o2a_bulk.sh
 set -e  # Exit immediately if a command exits with a non-zero status.
 
 CONVERTED_FOLDER="$CONVERTED_FOLDER"
+LOG_FILE="o2a_conversion_log_\$(date +%Y%m%d_%H%M%S).log"
+
+# Logging function
+log() {
+    local level="\$1"
+    local message="\$2"
+    local timestamp=\$(date "+%Y-%m-%d %H:%M:%S")
+    echo "[\$timestamp] [\$level] \$message" | tee -a "\$LOG_FILE"
+}
 
 run_o2a() {
     local input_dir="\$1"
     local output_dir="\$2"
     local action_type="\$3"
 
-    echo "Converting \$action_type action: \$(basename "\$input_dir")"
-    echo "Input directory: \$input_dir"
-    echo "Output directory: \$output_dir"
+    log "INFO" "Converting \$action_type action: \$(basename "\$input_dir")"
+    log "INFO" "Input directory: \$input_dir"
+    log "INFO" "Output directory: \$output_dir"
 
     if [ ! -f "\$input_dir/hdfs/workflow.xml" ]; then
-        echo "Error: workflow.xml not found in \$input_dir/hdfs/"
+        log "ERROR" "workflow.xml not found in \$input_dir/hdfs/"
         return 1
     fi
 
     ./bin/o2a -i "\$input_dir" -o "\$output_dir"
     if [ \$? -ne 0 ]; then
-        echo "Error: o2a conversion failed for \$input_dir"
+        log "ERROR" "o2a conversion failed for \$input_dir"
         return 1
     fi
-    echo "Conversion successful for \$(basename "\$input_dir")"
+    log "INFO" "Conversion successful for \$(basename "\$input_dir")"
 }
+
+log "INFO" "Starting bulk conversion process"
 
 # Convert shell actions
 for subflow in "\$CONVERTED_FOLDER"/shell_actions/*; do
@@ -115,9 +139,10 @@ for subflow in "\$CONVERTED_FOLDER"/subworkflow_actions/*; do
     fi
 done
 
-echo "Bulk conversion completed."
+log "INFO" "Bulk conversion completed"
 EOF
 
 chmod +x run_o2a_bulk.sh
 
-echo "Setup completed for $INPUT_FOLDER. You can now run ./run_o2a_bulk.sh to perform the conversion."
+log "INFO" "Setup completed for $INPUT_FOLDER. You can now run ./run_o2a_bulk.sh to perform the conversion."
+log "INFO" "Log file created: $LOG_FILE"
