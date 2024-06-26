@@ -2,13 +2,35 @@
 
 set -e  # Exit immediately if a command exits with a non-zero status.
 
-# Check if a folder name is provided
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <input_folder_name>"
+# Function to display usage information
+usage() {
+    echo "Usage: $0 -f <input_folder_name>"
+    echo "  -f    Specify the input folder name"
+    echo "  -h    Display this help message"
     exit 1
+}
+
+# Parse command-line options
+while getopts "f:h" opt; do
+    case ${opt} in
+        f )
+            INPUT_FOLDER=$OPTARG
+            ;;
+        h )
+            usage
+            ;;
+        \? )
+            usage
+            ;;
+    esac
+done
+
+# Check if INPUT_FOLDER is provided
+if [ -z "$INPUT_FOLDER" ]; then
+    echo "Error: Input folder is required."
+    usage
 fi
 
-INPUT_FOLDER="$1"
 CONVERTED_FOLDER="${INPUT_FOLDER}_CONVERTED"
 LOGS_FOLDER="$CONVERTED_FOLDER/logs"
 LOG_FILE="conversion_log_$(date +%Y%m%d_%H%M%S).log"
