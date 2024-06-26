@@ -18,3 +18,4 @@ output-artifacts/
 /.eggs/
 /pip-wheel-metadata
 /o2a/o2a_libs/dist
+*.log
