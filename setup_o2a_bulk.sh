@@ -4,9 +4,34 @@ set -e  # Exit immediately if a command exits with a non-zero status.
 
 # Function to display usage information
 usage() {
+    echo "Oozie to Airflow Conversion Setup Script"
+    echo
+    echo "This script prepares Oozie workflows for conversion to Apache Airflow DAGs."
+    echo "It organizes the input Oozie workflows into a structure suitable for the O2A"
+    echo "(Oozie to Airflow) conversion tool and generates a script to run the conversion."
+    echo
     echo "Usage: $0 -f <input_folder_name>"
-    echo "  -f    Specify the input folder name"
-    echo "  -h    Display this help message"
+    echo
+    echo "Options:"
+    echo "  -f <folder>    Specify the input folder containing Oozie workflows"
+    echo "  -h             Display this help message"
+    echo
+    echo "Description:"
+    echo "  - The script processes Oozie workflows in the specified input folder"
+    echo "  - It categorizes workflows into shell actions and subworkflow actions"
+    echo "  - A new folder structure is created with the suffix '_CONVERTED'"
+    echo "  - Logs are stored in the 'logs' subfolder of the converted folder"
+    echo "  - A 'run_o2a_bulk.sh' script is generated for running the O2A conversion"
+    echo
+    echo "Output:"
+    echo "  - <input_folder>_CONVERTED/          : Main output folder"
+    echo "    ├── shell_actions/                 : Processed shell action workflows"
+    echo "    ├── subworkflow_actions/           : Processed subworkflow actions"
+    echo "    ├── output/                        : Folder for O2A conversion output"
+    echo "    ├── logs/                          : Conversion log files"
+    echo "    └── run_o2a_bulk.sh                : Script to run O2A conversion"
+    echo
+    echo "Note: Ensure you have the O2A tool installed before running the conversion."
     exit 1
 }
 
