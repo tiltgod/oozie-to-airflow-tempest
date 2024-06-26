@@ -11,17 +11,7 @@ fi
 INPUT_FOLDER="$1"
 CONVERTED_FOLDER="${INPUT_FOLDER}_CONVERTED"
 LOGS_FOLDER="$CONVERTED_FOLDER/logs"
-LOG_FILE="$LOGS_FOLDER/conversion_log_$(date +%Y%m%d_%H%M%S).log"
-
-# Logging function
-log() {
-    local level="$1"
-    local message="$2"
-    local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
-    echo "[$timestamp] [$level] $message" | tee -a "$LOG_FILE"
-}
-
-log "INFO" "Starting conversion process for $INPUT_FOLDER"
+LOG_FILE="conversion_log_$(date +%Y%m%d_%H%M%S).log"
 
 # Create the main folders
 mkdir -p "$CONVERTED_FOLDER/shell_actions"
@@ -29,6 +19,15 @@ mkdir -p "$CONVERTED_FOLDER/subworkflow_actions"
 mkdir -p "$CONVERTED_FOLDER/output"
 mkdir -p "$LOGS_FOLDER"
 
+# Logging function
+log() {
+    local level="$1"
+    local message="$2"
+    local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
+    echo "[$timestamp] [$level] $message" | tee -a "$LOGS_FOLDER/$LOG_FILE"
+}
+
+log "INFO" "Starting conversion process for $INPUT_FOLDER"
 log "INFO" "Created directory structure in $CONVERTED_FOLDER"
 
 # Function to determine action type
@@ -94,14 +93,14 @@ set -e  # Exit immediately if a command exits with a non-zero status.
 
 CONVERTED_FOLDER="$CONVERTED_FOLDER"
 LOGS_FOLDER="$LOGS_FOLDER"
-LOG_FILE="$LOGS_FOLDER/o2a_conversion_log_\$(date +%Y%m%d_%H%M%S).log"
+LOG_FILE="o2a_conversion_log_\$(date +%Y%m%d_%H%M%S).log"
 
 # Logging function
 log() {
     local level="\$1"
     local message="\$2"
     local timestamp=\$(date "+%Y-%m-%d %H:%M:%S")
-    echo "[\$timestamp] [\$level] \$message" | tee -a "\$LOG_FILE"
+    echo "[\$timestamp] [\$level] \$message" | tee -a "\$LOGS_FOLDER/\$LOG_FILE"
 }
 
 run_o2a() {
@@ -148,4 +147,4 @@ EOF
 chmod +x run_o2a_bulk.sh
 
 log "INFO" "Setup completed for $INPUT_FOLDER. You can now run ./run_o2a_bulk.sh to perform the conversion."
-log "INFO" "Log files will be stored in: $LOGS_FOLDER"
+log "INFO" "Log files are stored in: $LOGS_FOLDER"

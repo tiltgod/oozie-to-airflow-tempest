@@ -3,6 +3,7 @@
 set -e  # Exit immediately if a command exits with a non-zero status.
 
 CONVERTED_FOLDER="CRM_CASA_SEGMENT_MODEL_CONVERTED"
+LOGS_FOLDER="CRM_CASA_SEGMENT_MODEL_CONVERTED/logs"
 LOG_FILE="o2a_conversion_log_$(date +%Y%m%d_%H%M%S).log"
 
 # Logging function
@@ -10,7 +11,7 @@ log() {
     local level="$1"
     local message="$2"
     local timestamp=$(date "+%Y-%m-%d %H:%M:%S")
-    echo "[$timestamp] [$level] $message" | tee -a "$LOG_FILE"
+    echo "[$timestamp] [$level] $message" | tee -a "$LOGS_FOLDER/$LOG_FILE"
 }
 
 run_o2a() {
