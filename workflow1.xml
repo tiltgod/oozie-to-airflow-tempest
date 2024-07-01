@@ -20,7 +20,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_01-CUST-VIEW">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -43,7 +43,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_02-CUST-PROFILE">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -66,7 +66,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_05_NET-WORTH">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -89,7 +89,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_07_NET-WORTH-3-MAX-BAL">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -112,7 +112,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_08_NET-WORTH-4-MIN-BAL">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -135,7 +135,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_09_NET_WORTH_5_CH-BAL">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -158,7 +158,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_10_NET_WORTH-6-PORT-IN-NW">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -181,7 +181,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_11_NET_WORTH-7-COVARIANCE">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -204,7 +204,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_12_NET_LOAN-AND-PAYMENT">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -239,7 +239,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_06_NET-WORTH-2-AVG-BAL">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -262,7 +262,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_19_BILL-_PAYMENT">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -285,7 +285,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_20_INFLOW-OUTFLOW">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -308,7 +308,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_21_FREE">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -333,7 +333,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_22_COMBINE_FP-BP-IFOF-Free">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -370,7 +370,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_03_RELATION-BANK">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -393,7 +393,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_04_RELATION-BANK-2">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -416,7 +416,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_13_CHANNEL_PREFERENCE">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -439,7 +439,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_14_FB_CH_PREF2_TOTAL">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -462,7 +462,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_15_FB_CH_PREF3_AVG">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -485,7 +485,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_16_FB_CH_PREF4_MAX">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -508,7 +508,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_17_FB_CH_PREF5_MIN">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -531,7 +531,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_23_CASHFLOW">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -554,7 +554,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_24_CAMP_SOLICIT">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -577,7 +577,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_25_PP_01_PREP_OTH_BANK">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -600,7 +600,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_26_KMA_EVENT">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -628,7 +628,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_25_PP_02_ID_OTH_BANK">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -651,7 +651,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_25_PP_03_MOBILE_OTH_BANK">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -676,7 +676,7 @@
     
     <action name="a_ABT_019_03_COMBINE_TABLE_BALL_25_PP_04_COMBINE">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
@@ -705,7 +705,7 @@
     
     <action name="a_ABT_019_93_Merge_Upload_to_Server">
         <sub-workflow>
-            <app-path>${base_path}/oozie/workflow/framework/Base-audit-workflow.xml</app-path>
+            <app-path>${base_path}/subwf</app-path>
             <propagate-configuration/>
             <configuration>
                 <property>
