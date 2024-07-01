@@ -1,0 +1,36 @@
+
+<workflow-app name="${flow_name}-${job_name}-workflow-${coordinator_time}"
+    xmlns="uri:oozie:workflow:1.0">
+    <!-- change start action name -->
+    <start to="tfm_casa_seg0102_gen_relationship_table_act01"/>
+
+    <kill name="Kill">
+        <message>Action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+
+    <!-- change action name -->
+    <action name="tfm_casa_seg0102_gen_relationship_table_act01">
+        <shell xmlns="uri:oozie:shell-action:1.0">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <exec>run_hive_cli.sh</exec>
+            <argument>${env}</argument>
+            <argument>${job_name}</argument>
+            <argument>${coordinator_time}</argument>
+            <file>${base_path}/oozie/script/framework/run_hive_cli.sh</file>
+            <file>${base_path}/oozie/config/${env}-spark_env.conf#spark_env.conf</file>
+            <file>${base_path}/oozie/script/macro_file/macro_reader.sh</file>
+            <file>${base_path}/oozie/script/encryption/decryption_string.py</file>
+            <file>${base_path}/oozie/config/${env}-hive.conf#hive.conf</file>
+            <file>${base_path}/oozie/config/sqoop-ingestion/${env}-database.conf#database.conf</file>
+            <file>${base_path}/kerberos/${wf:user()}.keytab#user.keytab</file>
+            <!-- change path to hql file -->
+            <file>${base_path}/oozie/hive/${flow_name}/${job_name}/tfm/tfm_casa_seg0102_gen_relationship_table_act01.hql#job.hql</file>
+        </shell>
+        <!-- change <ok to="next action name"/> or <ok to="End"/> if this is last action -->
+        <ok to="End"/>
+        <error to="Kill"/>
+    </action>
+
+    <end name="End"/>
+</workflow-app>
